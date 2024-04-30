@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 
-const useRealtimeState = <T>(): [state: T | undefined, setState: (newState: T) => void] => {
+const useRealtimeState = <T>(): [state: T | undefined, setState: (newState: T) => void, () => void] => {
   const [ws, setWs] = useState<WebSocket | null>(null);
   const [localState, setLocalState] = useState<T>();
 
@@ -26,7 +26,16 @@ const useRealtimeState = <T>(): [state: T | undefined, setState: (newState: T) =
     ws.send(JSON.stringify({ action: 'update', payload: newState }));
   };
 
-  return [localState, setRealtimeState];
+  const saveAndCloseBackend = () => {
+    if (!ws || ws.readyState !== WebSocket.OPEN) {
+      throw new Error('WebSocket connection is not open');
+    }
+
+    ws.send(JSON.stringify({ action: 'stop' }));
+    ws.close();
+  };
+
+  return [localState, setRealtimeState, saveAndCloseBackend];
 };
 
 export default useRealtimeState;
