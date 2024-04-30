@@ -1,5 +1,5 @@
 import React from "react";
-import StyledComponentsRegistry from "./lib/registry";
+import StyledComponentsRegistry from "@/lib/registry";
 import { GlobalStyle } from "./style/global";
 
 import { Poppins } from 'next/font/google'
