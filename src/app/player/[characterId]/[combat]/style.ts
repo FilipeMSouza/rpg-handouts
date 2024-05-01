@@ -70,7 +70,7 @@ export const ButtonWrapper = styled.div`
     padding: 10px 0 0 10px;
     margin-top: 55px;
 `;
-export const ActionButtons = styled.button`
+export const ActionButtons = styled.div`
     gap: 10px;
     display: flex;
     flex-direction: column;
