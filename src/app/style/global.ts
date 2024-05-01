@@ -12,12 +12,6 @@ export const GlobalStyle   = createGlobalStyle`
         
         --background: #242423;
         --text-color: #BFBFBF;
-        
-        --kai: #F27B13;
-        --elara: #8C031C;
-        --onnen: #277ce0;
-        --naloah: #622773;
-        --altair: #F2A413;
     }
     *{
         margin: 0;
