@@ -61,3 +61,38 @@ export const Mana = styled.span`
     text-shadow: 0 0 8px var(--text-color);
     transform: rotate(-20deg)
 `
+export const ButtonWrapper = styled.div`
+    gap: 15px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 10px 0 0 10px;
+    margin-top: 55px;
+`;
+export const ActionButtons = styled.button`
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    jsutify-content: center;
+    align-items: flex-start;
+    
+    border: none;
+    background: transparent;
+`;
+
+interface ButtonProps {
+    type: 'life' | 'mana'
+}
+
+const color = {
+  life: '#025951',
+  mana: '#023059'
+}
+export const Button = styled.button<ButtonProps>`
+    color: #fff;
+    background-color: ${props => color[props.type]};
+    padding: .5rem 1rem;
+    border: none;
+    border-radius: 5px;
+`;
