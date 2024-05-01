@@ -41,6 +41,12 @@ const character = ({params}: {params:{ characterId: number, combat: string }}) =
         if (shouldReduce) return { ...player, currentMana: player.currentMana - 1};
         return { ...player, currentMana: player.currentMana + 1};
     });
+
+    const handleCA = (shouldReduce: boolean, target: pjData) => modifyPlayer(target, (player) => {
+        if (shouldReduce) return { ...player, armorClass: player.armorClass - 1};
+        return { ...player, armorClass: player.armorClass + 1};
+    });
+
     const pj = useMemo(() => {
             if (!players) return null;
             return players[params.characterId]},
@@ -67,6 +73,7 @@ const character = ({params}: {params:{ characterId: number, combat: string }}) =
                         <Description>
                             <Life>{pj.currentLife}/{pj.life}</Life>
                             <Mana>{pj.currentMana}/{pj.mana}</Mana>
+                            <DescriptionText>CA :{ pj.armorClass }</DescriptionText>
                         </Description>
                     </Character>
                 </Wrapper>
@@ -79,6 +86,11 @@ const character = ({params}: {params:{ characterId: number, combat: string }}) =
                     <ActionButtons>
                         <Button type='mana' onClick={(e) => handleMana(false, pj)}>+ Mana</Button>
                         <Button type='mana' onClick={(e) => handleMana(true, pj)}>- Mana</Button>
+                    </ActionButtons>
+
+                    <ActionButtons>
+                        <Button type='mana' onClick={(e) => handleCA(false, pj)}>+ CA</Button>
+                        <Button type='mana' onClick={(e) => handleCA(true, pj)}>- CA</Button>
                     </ActionButtons>
                 </ButtonWrapper>
             </>
