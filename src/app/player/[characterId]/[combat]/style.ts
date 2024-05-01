@@ -74,7 +74,7 @@ export const ActionButtons = styled.div`
     gap: 10px;
     display: flex;
     flex-direction: column;
-    jsutify-content: center;
+    justify-content: center;
     align-items: flex-start;
     
     border: none;
