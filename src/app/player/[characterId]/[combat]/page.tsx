@@ -73,7 +73,7 @@ const character = ({params}: {params:{ characterId: number, combat: string }}) =
                         <Description>
                             <Life>{pj.currentLife}/{pj.life}</Life>
                             <Mana>{pj.currentMana}/{pj.mana}</Mana>
-                            <DescriptionText>CA :{ pj.armorClass }</DescriptionText>
+                            <DescriptionText>CA: { pj.armorClass }</DescriptionText>
                         </Description>
                     </Character>
                 </Wrapper>
