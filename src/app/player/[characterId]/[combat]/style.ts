@@ -20,7 +20,7 @@ interface characterProps {
 }
 
 export const Name = styled.span<characterProps>`
-    font-weight: 400;
+    font-weight: 700;
     font-size: 2.2rem;
     color: var(--text-color);
     text-shadow: 0 0 20px ${props => props.color};
@@ -34,7 +34,7 @@ export const Description = styled.div`
 `
 export const DescriptionText = styled.span`
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 600;
     color: var(--text-color);    
 `
 
@@ -48,7 +48,7 @@ export const CombatDescription = styled.div`
 `
 export const Life = styled.span`
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 600;
     color: var(--currentLife);
     text-shadow: 0 0 8px var(--text-color);
     transform: rotate(-20deg)
@@ -56,7 +56,7 @@ export const Life = styled.span`
 `
 export const Mana = styled.span`
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 600;
     color: var(--currentMana);
     text-shadow: 0 0 8px var(--text-color);
     transform: rotate(-20deg)
