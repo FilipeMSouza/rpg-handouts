@@ -82,12 +82,13 @@ export const ActionButtons = styled.div`
 `;
 
 interface ButtonProps {
-    type: 'life' | 'mana'
+    type: 'life' | 'mana' | 'toggle'
 }
 
 const color = {
   life: '#025951',
-  mana: '#023059'
+  mana: '#023059',
+  toggle: '#590230'
 };
 export const Button = styled.button<ButtonProps>`
     color: #fff;

@@ -1,6 +1,11 @@
 'use client';
+
 import Image from 'next/image';
+import { useMemo, useState } from 'react';
+
 import type { pjData } from '@/@types/pjData';
+import useRealtimeState from '@/app/hooks/useRealtimeState';
+
 import {
   ActionButtons,
   Button,
@@ -12,12 +17,20 @@ import {
   Mana,
   Name,
   Wrapper,
-} from '@/app/player/[characterId]/[combat]/style';
-import useRealtimeState from '@/app/hooks/useRealtimeState';
-import { useMemo } from 'react';
+} from './style';
 
-const character = ({ params }: {params:{ characterId: number, combat: string }}) =>{
+const character = ({ params: { characterId, state } }: { params:{ characterId: number, state: string }}) => {
+  const [battleState, setBattleState] = useState(state);
+  const handleBattleToggle = () => {
+    setBattleState(battleState === 'idle' ? 'combat' : 'idle');
+    window.history.pushState({}, '', `/player/${characterId}/${battleState === 'idle' ? 'combat' : 'idle'}`);
+  };
+
   const [players, setPlayers] = useRealtimeState<pjData[]>();
+  const pj = useMemo(() => {
+    if (!players) return null;
+    return players[characterId];
+  }, [players, characterId]);
 
   const modifyPlayer = (target: pjData, operation: (init: pjData) => pjData) => {
     if (!players) return;
@@ -45,36 +58,30 @@ const character = ({ params }: {params:{ characterId: number, combat: string }})
     return { ...player, armorClass: player.armorClass + 1 };
   });
 
-  const pj = useMemo(() => {
-    if (!players) return null;
-    return players[params.characterId];},
-  [players, params.characterId]);
   if(!pj) return (<div>loading...</div>);
-  return params.combat === 'idle' ? (
+  return <>
     <Wrapper>
       <Image src={ pj.image } alt={ pj.name } width={90} height={90} />
       <Character>
         <Name color={ pj.color }>{ pj.name }</Name>
         <Description>
-          <DescriptionText>{ pj.profession }</DescriptionText>
-          <DescriptionText>{ pj.level }</DescriptionText>
-        </Description>
-      </Character>
-    </Wrapper>
-  ) :
-    (
-      <>
-        <Wrapper>
-          <Image src={ pj.image } alt="onnen" width={90} height={90} />
-          <Character>
-            <Name color={ pj.color }>{ pj.name }</Name>
-            <Description>
+          { battleState === 'idle' ? (
+            <>
+              <DescriptionText>{ pj.profession }</DescriptionText>
+              <DescriptionText>{ pj.level }</DescriptionText>
+            </>
+          ) : (
+            <>
               <Life>{pj.currentLife}/{pj.life}</Life>
               <Mana>{pj.currentMana}/{pj.mana}</Mana>
               <DescriptionText>CA: { pj.armorClass }</DescriptionText>
-            </Description>
-          </Character>
-        </Wrapper>
+            </>
+          )}
+        </Description>
+      </Character>
+    </Wrapper>
+    { battleState === 'combat' && (
+      <>
         <ButtonWrapper>
           <ActionButtons>
             <Button type='life' onClick={() => handleLife(false, pj)}>+ Life</Button>
@@ -92,7 +99,9 @@ const character = ({ params }: {params:{ characterId: number, combat: string }})
           </ActionButtons>
         </ButtonWrapper>
       </>
-    );
+    )}
+    <Button style={{ margin: '1rem' }} type='toggle' onClick={handleBattleToggle}>Toggle</Button>
+  </>;
 };
 
 export default character;
