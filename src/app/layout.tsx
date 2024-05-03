@@ -1,10 +1,10 @@
-import React from "react";
-import StyledComponentsRegistry from "@/lib/registry";
-import { GlobalStyle } from "./style/global";
+import React from 'react';
+import StyledComponentsRegistry from '@/lib/registry';
+import { GlobalStyle } from './style/global';
 
-import { Poppins } from 'next/font/google'
+import { Poppins } from 'next/font/google';
 
-const poppins = Poppins({weight: ["400", "600", "700"], subsets: ["latin"]});
+const poppins = Poppins({ weight: ['400', '600', '700'], subsets: ['latin'] });
 
 export default function RootLayout({
   children,
@@ -15,8 +15,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={poppins.className}>
         <StyledComponentsRegistry>
-            {children}
-            <GlobalStyle />
+          {children}
+          <GlobalStyle />
         </StyledComponentsRegistry>
       </body>
     </html>

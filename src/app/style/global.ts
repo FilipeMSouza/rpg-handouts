@@ -2,14 +2,14 @@
 
 import { createGlobalStyle } from 'styled-components';
 
-export const GlobalStyle   = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
     :root{
         --totalLife: #025951;
         --currentLife: #0CF25D;
-        
+
         --totalMana: #023059;
         --currentMana: #1C66A6;
-        
+
         --background: #242423;
         --text-color: #BFBFBF;
     }

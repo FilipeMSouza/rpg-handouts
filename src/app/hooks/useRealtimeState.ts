@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const useRealtimeState = <T>(): [state: T | undefined, setState: (newState: T) => void, () => void] => {
   const [ws, setWs] = useState<WebSocket | null>(null);
@@ -12,7 +12,7 @@ const useRealtimeState = <T>(): [state: T | undefined, setState: (newState: T) =
     } else {
       ws.onmessage = (event) => {
         setLocalState(JSON.parse(event.data));
-      }
+      };
     }
 
     return () => ws?.close();
