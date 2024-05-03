@@ -84,23 +84,23 @@ const character = ({ params: { characterId, state } }: { params:{ characterId: n
       <>
         <ButtonWrapper>
           <ActionButtons>
-            <Button type='life' onClick={() => handleLife(false, pj)}>+ Life</Button>
-            <Button type='life' onClick={() => handleLife(true, pj)}>- Life</Button>
+            <Button color='life' onClick={() => handleLife(false, pj)}>+ Life</Button>
+            <Button color='life' onClick={() => handleLife(true, pj)}>- Life</Button>
           </ActionButtons>
 
           <ActionButtons>
-            <Button type='mana' onClick={() => handleMana(false, pj)}>+ Mana</Button>
-            <Button type='mana' onClick={() => handleMana(true, pj)}>- Mana</Button>
+            <Button color='mana' onClick={() => handleMana(false, pj)}>+ Mana</Button>
+            <Button color='mana' onClick={() => handleMana(true, pj)}>- Mana</Button>
           </ActionButtons>
 
           <ActionButtons>
-            <Button type='mana' onClick={() => handleCA(false, pj)}>+ CA</Button>
-            <Button type='mana' onClick={() => handleCA(true, pj)}>- CA</Button>
+            <Button color='mana' onClick={() => handleCA(false, pj)}>+ CA</Button>
+            <Button color='mana' onClick={() => handleCA(true, pj)}>- CA</Button>
           </ActionButtons>
         </ButtonWrapper>
       </>
     )}
-    <Button style={{ margin: '1rem' }} type='toggle' onClick={handleBattleToggle}>Toggle</Button>
+    <Button style={{ margin: '1rem' }} color='toggle' onClick={handleBattleToggle}>Toggle</Button>
   </>;
 };
 
