@@ -2,17 +2,19 @@
 import { useState } from 'react';
 import {
   ActionButtons,
+  EyeButton,
   Form,
   Input,
   Label,
   Login,
+  PasswordWrapper,
   SignIn,
   Wrapper,
 } from '@/app/login/style';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const LoginPage = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const turnVisible = () => setIsVisible(!isVisible);
   const password = isVisible ? 'text' : 'password';
   return (
     <Form>
@@ -22,11 +24,21 @@ const LoginPage = () => {
       </Wrapper>
       <Wrapper>
         <Label>Password</Label>
-        <Input type={password} />
+        <PasswordWrapper>
+          <Input type={password} />
+          <EyeButton
+            onClick={(e) => {
+              e.preventDefault();
+              setIsVisible(!isVisible);
+            }}
+          >
+            {isVisible ? <FaEye /> : <FaEyeSlash />}
+          </EyeButton>
+        </PasswordWrapper>
       </Wrapper>
       <ActionButtons>
         <SignIn>Sign In</SignIn>
-        <Login>Log In</Login>
+        <Login type='submit'>Log In</Login>
       </ActionButtons>
     </Form>
   );
