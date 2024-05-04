@@ -27,13 +27,15 @@ export const Input = styled.input`
   color: var(--text-color);
   width: 25vh;
   height: 25px;
+  font-size: 0.9rem;
+  font-weight: 500;
 `;
 
 export const Label = styled.label`
   font-size: 1rem;
   color: var(--text-white);
   margin-bottom: 4px;
-  font-weight: 600;
+  font-weight: 500;
 `;
 
 export const Login = styled.button`

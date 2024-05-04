@@ -19,7 +19,7 @@ const LoginPage = () => {
   return (
     <Form>
       <Wrapper>
-        <Label>User login</Label>
+        <Label>User Name</Label>
         <Input type='text' />
       </Wrapper>
       <Wrapper>

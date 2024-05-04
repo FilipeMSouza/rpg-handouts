@@ -1,4 +1,4 @@
-import type {pjData} from '@/@types/pjData';
+import type { pjData } from '@/@types/pjData';
 
 export const players: pjData[] = [
   {
@@ -23,7 +23,7 @@ export const players: pjData[] = [
     image: '/elara.png',
     color: '#8C031C',
     currentMana: 6,
-    currentLife: 17, g
+    currentLife: 17,
   },
   {
     name: 'Kai',
@@ -60,5 +60,5 @@ export const players: pjData[] = [
     color: '#277ce0',
     currentMana: 10,
     currentLife: 31,
-  }
+  },
 ];
