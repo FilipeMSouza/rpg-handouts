@@ -10,8 +10,10 @@ const characterCreation = () => {
   const [players, setPlayers] = useRealtimeState<pjData[]>();
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
 
-  const handleCharacterCreation = () => {
+  const handleCharacterCreation = (formData: FormData) => {
     setButtonDisabled(true);
+    sendToServer(formData);
+    setButtonDisabled(false);
   };
 
   const sendToServer = async (formData: FormData) => {
