@@ -15,8 +15,8 @@ const ObjectParser = ({ object, path = [] }: { object: any, path?: string[] }) =
   if (typeof object !== 'object') return <ValueNode key={path.join('>')} path={path} value={object} />;
   if (!object) {
     return <OptionsContainer>
-      <button onClick={() => setLocalState(recursiveValueUpdate(path, [], localState!))}>+ Array</button>
-      <button onClick={() => setLocalState(recursiveValueUpdate(path, {}, localState!))}>+ Object</button>
+      <button onClick={() => setLocalState(recursiveValueUpdate([...path, 'new-item'], [], localState!))}>+ Array</button>
+      <button onClick={() => setLocalState(recursiveValueUpdate([...path, 'new-item'], {}, localState!))}>+ Object</button>
     </OptionsContainer>;
   }
 
@@ -27,6 +27,7 @@ const ObjectParser = ({ object, path = [] }: { object: any, path?: string[] }) =
         const newPath = [...path, i.toString()];
         return <ObjectParser key={newPath.join('>')} object={item} path={newPath} />;
       })}
+      <button onClick={() => setLocalState(recursiveValueUpdate([...path, 'new-item'], null, localState!))}>+</button>
     </ArrayContainer>;
   }
 

@@ -1,6 +1,11 @@
 const recursiveValueUpdate = (path: string[], value: any, obj: any): object => {
   const targetKey = path.shift();
-  if (path.length === 0) return value;
+  if (path.length === 0) {
+    if (targetKey === 'new-item') {
+      if (Array.isArray(obj)) return [...obj, value];
+    }
+    return value;
+  }
 
   if (Array.isArray(obj)) return obj.map((item, i) => {
     if (i !== Number(targetKey)) return item;
