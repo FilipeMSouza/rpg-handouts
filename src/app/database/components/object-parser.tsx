@@ -21,6 +21,7 @@ const ObjectParser = ({ object, path = [] }: { object: any, path?: string[] }) =
   const [isAddingKey, setIsAddingKey] = useState(false);
 
   return <ObjectContainer key={path.join('>')}>
+    <button onClick={() => setLocalState(removeRecord(path, localState!)!)}>🚮</button>
     {Object.entries(object).map(([key, val]) => {
       const newPath = [...path, key];
       return <ArrayContainer key={newPath.join('>')}>
