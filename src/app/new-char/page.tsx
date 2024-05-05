@@ -2,18 +2,23 @@
 
 import { Form, Wrapper } from '@/app/style';
 import { Button } from '@/app/player/[characterId]/[state]/style';
-import React from 'react';
+import React, { useState } from 'react';
 import useRealtimeState from '@/app/hooks/useRealtimeState';
 import type { pjData } from '@/@types/pjData';
 
 const characterCreation = () => {
   const [players, setPlayers] = useRealtimeState<pjData[]>();
+  const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
 
-  const sendToServer = (formData: FormData) => {
+  const handleCharacterCreation = () => {
+    setButtonDisabled(true);
+  };
+
+  const sendToServer = async (formData: FormData) => {
     const reader = new FileReader();
 
     reader.readAsDataURL(formData.get('characterAvatar') as File);
-    reader.onload = () => {
+    reader.onload = async () => {
       const newCharacter: pjData = {
         name: formData.get('characterName')! as string,
         image: reader.result as string,
@@ -31,12 +36,18 @@ const characterCreation = () => {
         return alert('Erro 500 algo de errado aconteceu...');
       setPlayers([...players, newCharacter]);
       alert(`${newCharacter.name} has been added to the server.`);
+      setButtonDisabled(false);
     };
   };
 
   return (
     <Wrapper>
-      <Form action={sendToServer}>
+      <Form
+        action={(formData) => {
+          handleCharacterCreation();
+          sendToServer(formData);
+        }}
+      >
         <Wrapper>
           <label>Character Avatar:</label>
           <input
@@ -110,7 +121,7 @@ const characterCreation = () => {
             type='number'
           />
         </Wrapper>
-        <Button color='toggle' type='submit'>
+        <Button color='toggle' type='submit' disabled={buttonDisabled}>
           Create character!
         </Button>
       </Form>
