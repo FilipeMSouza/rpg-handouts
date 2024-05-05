@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import recursiveValueUpdate from '../utils/recursiveValueUpdate';
-import { DatabaseContext } from '../page';
+import DatabaseContext from '../context';
 
 const ValueNode = ({ value, path }: { value: any, path: string[] }) => {
   const [localState, setLocalState] = useContext(DatabaseContext);

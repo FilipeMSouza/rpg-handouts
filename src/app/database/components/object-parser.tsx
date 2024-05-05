@@ -5,7 +5,7 @@ import ObjectContainer from './object-container';
 import ValueNode from './value-node';
 import removeRecord from '../utils/removeRecord';
 import includeRecord from '../utils/includeRecord';
-import { DatabaseContext } from '../page';
+import DatabaseContext from '../context';
 
 const ObjectParser = ({ object, path = [] }: { object: object, path?: string[] }) => {
   const [localState, setLocalState] = useContext(DatabaseContext);

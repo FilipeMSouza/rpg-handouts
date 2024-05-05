@@ -1,11 +1,10 @@
 'use client';
 
-import { createContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import FAB from '@/components/fab';
 import useRealtimeState from '../hooks/useRealtimeState';
 import ObjectParser from './components/object-parser';
-
-export const DatabaseContext = createContext<[state: any[] | object | undefined, setState: (newState: any[] | object) => void]>([undefined, () => {}]);
+import DatabaseContext from './context';
 
 const DatabaseEditor = () => {
   const [databaseJSON, setDatabase] = useRealtimeState<any[] | object>();
