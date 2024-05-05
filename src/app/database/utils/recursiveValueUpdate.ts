@@ -1,4 +1,5 @@
 const recursiveValueUpdate = (path: string[], value: any, obj: any): object => {
+  if (obj === null) return value;
   const targetKey = path.shift();
   if (path.length === 0) {
     if (targetKey === 'new-item') {

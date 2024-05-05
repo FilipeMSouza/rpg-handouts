@@ -12,6 +12,8 @@ import OptionsContainer from './options-container';
 
 const ObjectParser = ({ object, path = [] }: { object: any, path?: string[] }) => {
   const [localState, setLocalState] = useContext(DatabaseContext);
+  const [isAddingKey, setIsAddingKey] = useState(false);
+
   if (typeof object !== 'object') return <ValueNode key={path.join('>')} path={path} value={object} />;
   if (!object) {
     return <OptionsContainer>
@@ -31,8 +33,6 @@ const ObjectParser = ({ object, path = [] }: { object: any, path?: string[] }) =
     </ArrayContainer>;
   }
 
-  const [isAddingKey, setIsAddingKey] = useState(false);
-
   return <ObjectContainer key={path.join('>')}>
     <button onClick={() => setLocalState(removeRecord(path, localState!)!)}>🚮</button>
     {Object.entries(object).map(([key, val]) => {
@@ -45,14 +45,21 @@ const ObjectParser = ({ object, path = [] }: { object: any, path?: string[] }) =
     })}
     {isAddingKey ? (
       <form action={(e) => {
-        const [key, value] = Array.from(e.values());
+        const [key, value, submitType] = Array.from(e.values());
+        if (submitType === 'new-item' && !!key) {
+          setLocalState(includeRecord(path, `${key}`, null, localState!));
+          setIsAddingKey(false);
+          return;
+        }
+        if (!key || !value) return;
         setLocalState(includeRecord(path, `${key}`, value, localState!));
         setIsAddingKey(false);
       }}>
         <input name='key' placeholder="Key" />
         <input name='value' placeholder="Value" />
-        <button type='submit'>✅</button>
+        <button name='submit' value='text-value' type='submit'>✅</button>
         <button onClick={() => setIsAddingKey(false)}>❌</button>
+        <button name='submit' value='new-item' type='submit'>📦</button>
       </form>
     ) : (
       <button onClick={() => setIsAddingKey(true)}>+</button>
