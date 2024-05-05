@@ -6,10 +6,17 @@ import ValueNode from './value-node';
 import removeRecord from '../utils/removeRecord';
 import includeRecord from '../utils/includeRecord';
 import DatabaseContext from '../context';
+import recursiveValueUpdate from '../utils/recursiveValueUpdate';
 
 const ObjectParser = ({ object, path = [] }: { object: any, path?: string[] }) => {
   const [localState, setLocalState] = useContext(DatabaseContext);
   if (typeof object !== 'object') return <ValueNode key={path.join('>')} path={path} value={object} />;
+  if (!object) {
+    return <ArrayContainer>
+      <button onClick={() => setLocalState(recursiveValueUpdate(path, [], localState!))}>+ Array</button>
+      <button onClick={() => setLocalState(recursiveValueUpdate(path, {}, localState!))}>+ Object</button>
+    </ArrayContainer>;
+  }
 
   if (Array.isArray(object)) {
     return <ArrayContainer>
