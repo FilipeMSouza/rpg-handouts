@@ -1,6 +1,6 @@
 import type { pjData } from '@/@types/pjData';
 
-export const players : pjData[] = [
+export const players: pjData[] = [
   {
     name: 'Altair',
     profession: 'Caçador',
@@ -60,5 +60,5 @@ export const players : pjData[] = [
     color: '#277ce0',
     currentMana: 10,
     currentLife: 31,
-  }
+  },
 ];
