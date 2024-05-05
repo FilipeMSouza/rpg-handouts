@@ -14,7 +14,7 @@ const DatabaseEditor = () => {
     setLocalState(databaseJSON);
   }, [databaseJSON]);
 
-  if (!localState) return <>🚧 Loading 🚧</>;
+  if (localState === undefined) return <>🚧 Loading 🚧</>;
   return <DatabaseContext.Provider value={[localState, setLocalState]}>
     <ObjectParser object={localState} />
     <FAB onClick={() => setDatabase(localState)}>💾</FAB>

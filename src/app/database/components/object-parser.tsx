@@ -12,10 +12,13 @@ const ObjectParser = ({ object, path = [] }: { object: any, path?: string[] }) =
   if (typeof object !== 'object') return <ValueNode key={path.join('>')} path={path} value={object} />;
 
   if (Array.isArray(object)) {
-    return <ArrayContainer>{object.map((item, i) => {
-      const newPath = [...path, i.toString()];
-      return <ObjectParser key={newPath.join('>')} object={item} path={newPath} />;
-    })}</ArrayContainer>;
+    return <ArrayContainer>
+      <button onClick={() => setLocalState(removeRecord(path, localState!)!)}>🚮</button>
+      {object.map((item, i) => {
+        const newPath = [...path, i.toString()];
+        return <ObjectParser key={newPath.join('>')} object={item} path={newPath} />;
+      })}
+    </ArrayContainer>;
   }
 
   const [isAddingKey, setIsAddingKey] = useState(false);
