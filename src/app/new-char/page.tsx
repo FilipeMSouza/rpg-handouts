@@ -16,11 +16,11 @@ const characterCreation = () => {
     setButtonDisabled(false);
   };
 
-  const sendToServer = async (formData: FormData) => {
+  const sendToServer = (formData: FormData) => {
     const reader = new FileReader();
 
     reader.readAsDataURL(formData.get('characterAvatar') as File);
-    reader.onload = async () => {
+    reader.onload = () => {
       const newCharacter: pjData = {
         name: formData.get('characterName')! as string,
         image: reader.result as string,
