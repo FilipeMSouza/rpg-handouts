@@ -7,15 +7,17 @@ import removeRecord from '../utils/removeRecord';
 import includeRecord from '../utils/includeRecord';
 import DatabaseContext from '../context';
 import recursiveValueUpdate from '../utils/recursiveValueUpdate';
+import RecordContainer from './record-container';
+import OptionsContainer from './options-container';
 
 const ObjectParser = ({ object, path = [] }: { object: any, path?: string[] }) => {
   const [localState, setLocalState] = useContext(DatabaseContext);
   if (typeof object !== 'object') return <ValueNode key={path.join('>')} path={path} value={object} />;
   if (!object) {
-    return <ArrayContainer>
+    return <OptionsContainer>
       <button onClick={() => setLocalState(recursiveValueUpdate(path, [], localState!))}>+ Array</button>
       <button onClick={() => setLocalState(recursiveValueUpdate(path, {}, localState!))}>+ Object</button>
-    </ArrayContainer>;
+    </OptionsContainer>;
   }
 
   if (Array.isArray(object)) {
@@ -34,11 +36,11 @@ const ObjectParser = ({ object, path = [] }: { object: any, path?: string[] }) =
     <button onClick={() => setLocalState(removeRecord(path, localState!)!)}>🚮</button>
     {Object.entries(object).map(([key, val]) => {
       const newPath = [...path, key];
-      return <ArrayContainer key={newPath.join('>')}>
+      return <RecordContainer key={newPath.join('>')}>
         <button onClick={() => setLocalState(removeRecord(newPath, localState!)!)}>🚮</button>
         <ObjectParser object={key} path={[...newPath, 'key']} />
         <ObjectParser object={val} path={[...newPath, 'value']} />
-      </ArrayContainer>;
+      </RecordContainer>;
     })}
     {isAddingKey ? (
       <form action={(e) => {
