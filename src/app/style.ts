@@ -9,6 +9,14 @@ export const Wrapper = styled.div`
   padding: 10px 0 0 10px;
 `;
 
+export const Form = styled.form`
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+
 export const PlayerLink = styled.a`
   text-decoration: none;
 `;

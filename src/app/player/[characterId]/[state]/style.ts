@@ -82,7 +82,7 @@ export const ActionButtons = styled.div`
 `;
 
 interface ButtonProps {
-    type: 'life' | 'mana' | 'toggle'
+    color: 'life' | 'mana' | 'toggle'
 }
 
 const color = {
@@ -92,7 +92,7 @@ const color = {
 };
 export const Button = styled.button<ButtonProps>`
     color: #fff;
-    background-color: ${props => color[props.type]};
+    background-color: ${props => color[props.color]};
     padding: .5rem 1rem;
     border: none;
     border-radius: 5px;
