@@ -1,10 +1,9 @@
 'use client';
 
 import Image from 'next/image';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
-import type { pjData } from '@/@types/pjData';
-import useRealtimeState from '@/app/hooks/useRealtimeState';
+import usePlayerState from '@/app/hooks/usePlayerState';
 
 import {
   ActionButtons,
@@ -19,44 +18,26 @@ import {
   Wrapper,
 } from './style';
 
-const character = ({ params: { characterId, state } }: { params:{ characterId: number, state: string }}) => {
+const character = ({ params: { characterId, state } }: { params:{ characterId: string, state: string }}) => {
   const [battleState, setBattleState] = useState(state);
   const handleBattleToggle = () => {
     setBattleState(battleState === 'idle' ? 'combat' : 'idle');
     window.history.pushState({}, '', `/player/${characterId}/${battleState === 'idle' ? 'combat' : 'idle'}`);
   };
 
-  const [players, setPlayers] = useRealtimeState<pjData[]>();
-  const pj = useMemo(() => {
-    if (!players) return null;
-    return players[characterId];
-  }, [players, characterId]);
-
-  const modifyPlayer = (target: pjData, operation: (init: pjData) => pjData) => {
-    if (!players) return;
-    const newPlayers = players.map((player) => {
-      if (player.name === target.name) {
-        return operation(player);
-      }
-      return player;
-    });
-    setPlayers(newPlayers);
-  };
-
-  const handleLife = (shouldReduce: boolean, target: pjData) => modifyPlayer(target, (player) => {
-    if (shouldReduce) return { ...player, currentLife: player.currentLife - 1 };
-    return { ...player, currentLife: player.currentLife + 1 };
-  });
-
-  const handleMana = (shouldReduce: boolean, target: pjData) => modifyPlayer(target, (player) => {
-    if (shouldReduce) return { ...player, currentMana: player.currentMana - 1 };
-    return { ...player, currentMana: player.currentMana + 1 };
-  });
-
-  const handleCA = (shouldReduce: boolean, target: pjData) => modifyPlayer(target, (player) => {
-    if (shouldReduce) return { ...player, armorClass: player.armorClass - 1 };
-    return { ...player, armorClass: player.armorClass + 1 };
-  });
+  const [pj, modifyPlayer] = usePlayerState(parseInt(characterId));
+  const handleLife = (shouldReduce: boolean) => modifyPlayer(
+    'currentLife',
+    (prev) => prev + (shouldReduce ? - 1 : + 1)
+  );
+  const handleMana = (shouldReduce: boolean) => modifyPlayer(
+    'currentMana',
+    (prev) => prev + (shouldReduce ? - 1 : + 1)
+  );
+  const handleCA = (shouldReduce: boolean) => modifyPlayer(
+    'armorClass',
+    (prev) => prev + (shouldReduce ? - 1 : + 1)
+  );
 
   if(!pj) return (<div>loading...</div>);
   return <>
@@ -84,18 +65,18 @@ const character = ({ params: { characterId, state } }: { params:{ characterId: n
       <>
         <ButtonWrapper>
           <ActionButtons>
-            <Button color='life' onClick={() => handleLife(false, pj)}>+ Life</Button>
-            <Button color='life' onClick={() => handleLife(true, pj)}>- Life</Button>
+            <Button type='life' onClick={() => handleLife(false)}>+ Life</Button>
+            <Button type='life' onClick={() => handleLife(true)}>- Life</Button>
           </ActionButtons>
 
           <ActionButtons>
-            <Button color='mana' onClick={() => handleMana(false, pj)}>+ Mana</Button>
-            <Button color='mana' onClick={() => handleMana(true, pj)}>- Mana</Button>
+            <Button type='mana' onClick={() => handleMana(false)}>+ Mana</Button>
+            <Button type='mana' onClick={() => handleMana(true)}>- Mana</Button>
           </ActionButtons>
 
           <ActionButtons>
-            <Button color='mana' onClick={() => handleCA(false, pj)}>+ CA</Button>
-            <Button color='mana' onClick={() => handleCA(true, pj)}>- CA</Button>
+            <Button type='mana' onClick={() => handleCA(false)}>+ CA</Button>
+            <Button type='mana' onClick={() => handleCA(true)}>- CA</Button>
           </ActionButtons>
         </ButtonWrapper>
       </>
