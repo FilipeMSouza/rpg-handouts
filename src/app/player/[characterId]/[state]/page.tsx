@@ -2,11 +2,12 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
-
+import { FaShieldAlt } from 'react-icons/fa';
 import usePlayerState from '@/app/hooks/usePlayerState';
 
 import {
   ActionButtons,
+  ArmorClass,
   Button,
   ButtonWrapper,
   Character,
@@ -62,7 +63,9 @@ const character = ({
                 <Mana>
                   {pj.currentMana}/{pj.mana}
                 </Mana>
-                <DescriptionText>CA: {pj.armorClass}</DescriptionText>
+                <ArmorClass>
+                  <FaShieldAlt className='icon' /> {pj.armorClass}
+                </ArmorClass>
               </>
             )}
           </Description>
@@ -90,10 +93,10 @@ const character = ({
             </ActionButtons>
 
             <ActionButtons>
-              <Button color='mana' onClick={() => handleCA(false)}>
+              <Button color='armor' onClick={() => handleCA(false)}>
                 + CA
               </Button>
-              <Button color='mana' onClick={() => handleCA(true)}>
+              <Button color='armor' onClick={() => handleCA(true)}>
                 - CA
               </Button>
             </ActionButtons>
