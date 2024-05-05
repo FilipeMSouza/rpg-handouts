@@ -8,7 +8,7 @@ import ObjectParser from './components/object-parser';
 import DatabaseContext from './context';
 
 const DatabaseEditor = () => {
-  if (process.env.SCOPE === 'prod') redirect('/');
+  if (process.env.SCOPE === 'prod') redirect('/forbidden');
 
   const [databaseJSON, setDatabase] = useRealtimeState<any[] | object>();
   const [localState, setLocalState] = useState<any[] | object | undefined>(databaseJSON);
