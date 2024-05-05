@@ -35,13 +35,31 @@ const FAB = styled.button`
 `;
 
 const DatabaseEditor = () => {
+  const [isAddingKey, setIsAddingKey] = useState(false);
+
   const objParser = (value: any[] | object | any, path: string[] = []): JSX.Element => {
     if (typeof value !== 'object') return finalNode(value, path);
     if (Array.isArray(value)) return <ArrayContainer>{value.map((item, i) => objParser(item, [...path, i.toString()]))}</ArrayContainer>;
-    return <Container key={path.join('>')}>{Object.entries(value).map(([key, value]) => <ArrayContainer key={[...path, key].join('>')}>
-      <p>{key}</p>
-      {objParser(value, [...path, key, 'value'])}
-    </ArrayContainer>)}</Container>;
+    return <Container key={path.join('>')}>
+      {Object.entries(value).map(([key, value]) => <ArrayContainer key={[...path, key].join('>')}>
+        <p>{key}</p>
+        {objParser(value, [...path, key, 'value'])}
+      </ArrayContainer>)}
+      {isAddingKey ? (
+        <form action={(e) => {
+          const [key, value] = Array.from(e.values());
+          setLocalState(includeRecord(path, `${key}`, value, localState!));
+          setIsAddingKey(false);
+        }}>
+          <input name='key' placeholder="Key" />
+          <input name='value' placeholder="Value" />
+          <button type='submit'>✅</button>
+          <button onClick={() => setIsAddingKey(false)}>❌</button>
+        </form>
+      ) : (
+        <button onClick={() => setIsAddingKey(true)}>+</button>
+      )}
+    </Container>;
   };
 
   const [databaseJSON, setDatabase] = useRealtimeState<any[] | object>();
@@ -70,6 +88,13 @@ const DatabaseEditor = () => {
   };
 
   const updateValue = (value: any) => setLocalState(recursiveUpdateValue(currentlyEditing, value, localState));
+
+  const includeRecord = (path: string[], key: string, value: any, obj: object): object => {
+    if (path.length === 0) return { ...obj, [key]: value };
+    const targetKey = path.shift();
+    if (Array.isArray(obj)) return obj.map((item, i) => (i === Number(targetKey) ? includeRecord(path, key, value, item) : item));
+    return Object.fromEntries(Object.entries(obj).map(([key, val]) => (key === targetKey ? [key, includeRecord(path, key, value, val)] : [key, val])));
+  };
 
   if (!localState) return <>🚧 Loading 🚧</>;
   return <>
