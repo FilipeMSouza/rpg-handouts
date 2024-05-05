@@ -42,6 +42,7 @@ const DatabaseEditor = () => {
     if (Array.isArray(value)) return <ArrayContainer>{value.map((item, i) => objParser(item, [...path, i.toString()]))}</ArrayContainer>;
     return <Container key={path.join('>')}>
       {Object.entries(value).map(([key, value]) => <ArrayContainer key={[...path, key].join('>')}>
+        <button onClick={() => setLocalState(removeRecord([...path, key], localState!)!)}>🚮</button>
         <p>{key}</p>
         {objParser(value, [...path, key, 'value'])}
       </ArrayContainer>)}
@@ -94,6 +95,13 @@ const DatabaseEditor = () => {
     const targetKey = path.shift();
     if (Array.isArray(obj)) return obj.map((item, i) => (i === Number(targetKey) ? includeRecord(path, key, value, item) : item));
     return Object.fromEntries(Object.entries(obj).map(([key, val]) => (key === targetKey ? [key, includeRecord(path, key, value, val)] : [key, val])));
+  };
+
+  const removeRecord = (path: string[], obj: object): object | null => {
+    if (path.length === 0) return null;
+    const targetKey = path.shift();
+    if (Array.isArray(obj)) return obj.map((item, i) => (i === Number(targetKey) ? removeRecord(path, item) : item)).filter((item) => item !== null);
+    return Object.fromEntries(Object.entries(obj).map(([key, val]) => (key === targetKey ? [key, removeRecord(path, val)] : [key, val])).filter(([, val]) => val !== null));
   };
 
   if (!localState) return <>🚧 Loading 🚧</>;
