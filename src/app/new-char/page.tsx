@@ -44,12 +44,7 @@ const characterCreation = () => {
 
   return (
     <Wrapper>
-      <Form
-        action={(formData) => {
-          handleCharacterCreation();
-          sendToServer(formData);
-        }}
-      >
+      <Form action={handleCharacterCreation}>
         <Wrapper>
           <label>Character Avatar:</label>
           <input
