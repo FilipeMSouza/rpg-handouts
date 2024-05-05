@@ -30,6 +30,7 @@ const characterCreation = () => {
       if (players === undefined)
         return alert('Erro 500 algo de errado aconteceu...');
       setPlayers([...players, newCharacter]);
+      alert(`${newCharacter.name} has been added to the server.`);
     };
   };
 
