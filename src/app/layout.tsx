@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import StyledComponentsRegistry from '@/lib/registry';
 import { GlobalStyle } from '@/style/global';
 
@@ -21,12 +21,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const [isDark, setIsDark] = useState(true);
-
+  const HandleThemeChange = () => {
+    setIsDark(!isDark);
+    localStorage.setItem(
+      'current-theme',
+      JSON.stringify(isDark ? dark : light)
+    );
+  };
+  useEffect(() => {
+    const currentTheme = localStorage.getItem('current-theme');
+    if (currentTheme === 'dark') {
+      setIsDark(true);
+    }
+    setIsDark(false);
+  }, []);
   return (
     <html lang='en'>
       <body className={poppins.className}>
         <StyledComponentsRegistry>
-          <ThemeButton color={isDark} onClick={() => setIsDark(!isDark)}>
+          <ThemeButton
+            color={isDark ? 'light' : 'dark'}
+            onClick={HandleThemeChange}
+          >
             {isDark ? <FaSun /> : <FaMoon />}
           </ThemeButton>
           <ThemeProvider theme={isDark ? dark : light}>

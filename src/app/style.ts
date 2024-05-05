@@ -34,7 +34,7 @@ export const Name = styled.span<{ color: string }>`
 `;
 
 interface ThemeButtonProps {
-  color: boolean;
+  color: 'dark' | 'light';
 }
 
 const color = {
@@ -51,5 +51,5 @@ export const ThemeButton = styled.button<ThemeButtonProps>`
   border: none;
 
   font-size: 2rem;
-  color: ${(props) => (props.color ? color.light : color.dark)};
+  color: ${(props) => (props.color === 'dark' ? color.dark : color.light)};
 `;
