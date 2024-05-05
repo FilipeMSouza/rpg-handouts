@@ -1,12 +1,15 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { redirect } from 'next/navigation';
 import FAB from '@/components/fab';
 import useRealtimeState from '../hooks/useRealtimeState';
 import ObjectParser from './components/object-parser';
 import DatabaseContext from './context';
 
 const DatabaseEditor = () => {
+  if (process.env.SCOPE === 'prod') redirect('/');
+
   const [databaseJSON, setDatabase] = useRealtimeState<any[] | object>();
   const [localState, setLocalState] = useState<any[] | object | undefined>(databaseJSON);
   useEffect(() => {
