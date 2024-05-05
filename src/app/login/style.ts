@@ -22,9 +22,9 @@ export const Input = styled.input`
   padding: 5px;
   background: none;
   border-radius: 8px;
-  border: 1px solid var(--text-color);
+  border: 2px solid ${({ theme }) => theme.colors.textColor};
 
-  color: var(--text-color);
+  color: ${({ theme }) => theme.colors.textColor};
   width: 25vh;
   height: 25px;
   font-size: 0.9rem;
@@ -33,27 +33,37 @@ export const Input = styled.input`
 
 export const Label = styled.label`
   font-size: 1rem;
-  color: var(--text-white);
+  color: ${({ theme }) => theme.colors.textColor};
   margin-bottom: 4px;
   font-weight: 500;
 `;
 
 export const Login = styled.button`
   border-radius: 8px;
-  border: 1px solid var(--currentMana);
+  border: 2px solid
+    ${({ theme }) =>
+    theme.name === 'dark-theme'
+      ? theme.colors.pink.sat500
+      : theme.colors.green.sat400};
 
   background: none;
   padding: 10px 20px;
-  color: var(--text-white);
+  color: ${({ theme }) => theme.colors.textColor};
 `;
 
 export const SignIn = styled.button`
   border-radius: 8px;
-  border: 1px solid var(--totalMana);
+  border: none;
 
   padding: 10px 20px;
-  color: var(--text-white);
-  background: var(--currentMana);
+  color: ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) =>
+    theme.name === 'dark-theme'
+      ? theme.colors.pink.sat500
+      : theme.colors.green.sat600}
+}
+
+;
 `;
 
 export const ActionButtons = styled.div`
@@ -68,9 +78,9 @@ export const ActionButtons = styled.div`
 export const EyeButton = styled.button`
   background: none;
   border: none;
-  color: var(--text-white);
+  color: ${({ theme }) => theme.colors.textColor};
   position: absolute;
-  font-size: 0.9rem;
+  font-size: 1rem;
   margin-right: 10px;
   margin-top: 3px;
 `;
