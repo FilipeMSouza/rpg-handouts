@@ -9,12 +9,32 @@ import { dark, light } from '@/style/Theme.styled';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import { ThemeButton } from '@/app/style';
 import { DARK_THEME } from '@/consts';
+import { LoginPage, Navbar, Page, PageLink } from '@/app/style';
 
 const poppins = Poppins({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
   subsets: ['latin'],
   style: ['normal', 'italic'],
 });
+
+const NavBarComponent = () => {
+  return (
+    <Navbar>
+      <Page>
+        <PageLink href={'/'}>Home</PageLink>
+      </Page>
+      <Page>
+        <PageLink href={'/new-char'}>Create new character</PageLink>
+      </Page>
+      <Page>
+        <PageLink href={'/database'}>Character database</PageLink>
+      </Page>
+      <LoginPage>
+        <PageLink href={'/login'}>Login</PageLink>
+      </LoginPage>
+    </Navbar>
+  );
+};
 
 export default function RootLayout({
   children,
@@ -53,7 +73,8 @@ export default function RootLayout({
             </ThemeButton>
           )}
           <ThemeProvider theme={selectedTheme}>
-            {children}
+            <NavBarComponent />
+              {children}
             <GlobalStyle />
           </ThemeProvider>
         </StyledComponentsRegistry>
