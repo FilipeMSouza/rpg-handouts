@@ -4,5 +4,6 @@ module.exports = {
   },
   env: {
     REALTIME_ENDPOINT: process.env.REALTIME_ENDPOINT,
+    SCOPE: process.env.SCOPE,
   },
 };

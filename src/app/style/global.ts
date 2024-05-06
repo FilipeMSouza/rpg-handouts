@@ -29,6 +29,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     body {
+      color: var(--text-color);
       background-color: var(--background);
       -webkit-font-smoothing: antialiased;
     }
