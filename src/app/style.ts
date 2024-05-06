@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { DARK_THEME } from '@/consts';
 
 export const Wrapper = styled.div`
   gap: 1rem;
@@ -29,7 +30,10 @@ export const Character = styled.div`
 export const Name = styled.span<{ color: string }>`
   font-weight: 400;
   font-size: 2.2rem;
-  color: ${({ theme }) => theme.colors.textColor};
+  color: ${({ theme }) =>
+    theme.name === DARK_THEME
+      ? theme.colors.textColor
+      : theme.colors.gray.sat600};
   text-shadow: 0 0 20px ${(props) => props.color};
 `;
 
