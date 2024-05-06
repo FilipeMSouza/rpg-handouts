@@ -42,8 +42,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const localTheme = useMemo(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    if (!localStorage) return light;
+    if (typeof window === 'undefined') return dark;
     const theme = localStorage.getItem('current-theme');
     if (theme === DARK_THEME) {
       return dark;
