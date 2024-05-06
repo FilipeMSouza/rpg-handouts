@@ -42,6 +42,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const localTheme = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    if (!localStorage) return light;
     const theme = localStorage.getItem('current-theme');
     if (theme === DARK_THEME) {
       return dark;
@@ -74,7 +76,7 @@ export default function RootLayout({
           )}
           <ThemeProvider theme={selectedTheme}>
             <NavBarComponent />
-              {children}
+            {children}
             <GlobalStyle />
           </ThemeProvider>
         </StyledComponentsRegistry>

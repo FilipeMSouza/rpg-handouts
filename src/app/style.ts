@@ -48,15 +48,14 @@ const color = {
 
 export const ThemeButton = styled.button<ThemeButtonProps>`
   position: absolute;
-  top: 1rem;
+  top: 5rem;
   right: 1rem;
 
   background: none;
   border: none;
 
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: ${(props) => (props.color === 'dark' ? color.dark : color.light)};
-  color: var(--text-color);
   text-shadow: 0 0 20px ${(props) => props.color};
 `;
 
