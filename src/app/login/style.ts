@@ -1,5 +1,6 @@
 'use client';
 import styled from 'styled-components';
+import { DARK_THEME } from '@/consts';
 
 export const Form = styled.form`
   display: flex;
@@ -42,7 +43,7 @@ export const Login = styled.button`
   border-radius: 8px;
   border: 2px solid
     ${({ theme }) =>
-    theme.name === 'dark-theme'
+    theme.name === DARK_THEME
       ? theme.colors.pink.sat500
       : theme.colors.green.sat400};
 
@@ -58,12 +59,9 @@ export const SignIn = styled.button`
   padding: 10px 20px;
   color: ${({ theme }) => theme.colors.white};
   background: ${({ theme }) =>
-    theme.name === 'dark-theme'
+    theme.name === DARK_THEME
       ? theme.colors.pink.sat500
-      : theme.colors.green.sat600}
-}
-
-;
+      : theme.colors.green.sat60};
 `;
 
 export const ActionButtons = styled.div`

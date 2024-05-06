@@ -1,6 +1,7 @@
 'use client';
 
 import styled from 'styled-components';
+import { DARK_THEME } from '@/consts';
 
 export const Wrapper = styled.div`
   gap: 15px;
@@ -22,7 +23,10 @@ interface characterProps {
 export const Name = styled.span<characterProps>`
   font-weight: 600;
   font-size: 2.2rem;
-  color: ${({ theme }) => theme.colors.textColor};
+  color: ${({ theme }) =>
+    theme.name === DARK_THEME
+      ? theme.colors.textColor
+      : theme.colors.gray.sat700};
   text-shadow: 0 0 20px ${(props) => props.color};
 `;
 export const Description = styled.div`
@@ -52,7 +56,7 @@ export const Life = styled.span`
   color: ${({ theme }) => theme.colors.green.sat400};
   text-shadow: 0 0 8px
     ${({ theme }) =>
-    theme.name === 'dark-theme'
+    theme.name === DARK_THEME
       ? theme.colors.green.sat400
       : theme.colors.green.sat600};
   transform: rotate(-20deg);
@@ -63,7 +67,7 @@ export const Mana = styled.span`
   color: ${({ theme }) => theme.colors.blue.sat400};
   text-shadow: 0 0 8px
     ${({ theme }) =>
-    theme.name === 'dark-theme'
+    theme.name === DARK_THEME
       ? theme.colors.blue.sat400
       : theme.colors.blue.sat600};
   transform: rotate(-20deg);
@@ -112,12 +116,12 @@ export const ArmorClass = styled.span`
   align-items: center;
   justify-content: center;
   color: ${({ theme }) =>
-    theme.name === 'dark-theme'
+    theme.name === DARK_THEME
       ? theme.colors.gray.sat100
       : theme.colors.gray.sat600};
   text-shadow: 0 0 8px
     ${({ theme }) =>
-    theme.name === 'dark-theme'
+    theme.name === DARK_THEME
       ? theme.colors.purple.sat50
       : theme.colors.gray.sat600};
 `;
