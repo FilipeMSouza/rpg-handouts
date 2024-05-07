@@ -1,10 +1,10 @@
 'use client';
 
-import { Form, Wrapper } from '@/app/style';
 import { Button } from '@/app/player/[characterId]/[state]/style';
 import React, { useState } from 'react';
 import useRealtimeState from '@/app/hooks/useRealtimeState';
 import type { pjData } from '@/@types/pjData';
+import { Form, Input, Label, Wrapper } from '@/app/login/style';
 
 const characterCreation = () => {
   const [players, setPlayers] = useRealtimeState<pjData[]>();
@@ -43,21 +43,21 @@ const characterCreation = () => {
   };
 
   return (
-    <Wrapper>
+    <>
       <Form action={handleCharacterCreation}>
         <Wrapper>
-          <label>Character Avatar:</label>
-          <input
+          <Label>Character Avatar:</Label>
+          <Input
             required={true}
             name='characterAvatar'
-            accept='.jpg, .png'
+            accept='.jpg, .png .gif'
             placeholder='Character Avatar'
             type='file'
           />
         </Wrapper>
         <Wrapper>
-          <label>Character Name:</label>
-          <input
+          <Label>Character Name:</Label>
+          <Input
             required={true}
             name='characterName'
             placeholder='Name'
@@ -65,8 +65,8 @@ const characterCreation = () => {
           />
         </Wrapper>
         <Wrapper>
-          <label>Character Level:</label>
-          <input
+          <Label>Character Level:</Label>
+          <Input
             required={true}
             name='characterLevel'
             placeholder='Level'
@@ -74,8 +74,8 @@ const characterCreation = () => {
           />
         </Wrapper>
         <Wrapper>
-          <label>Character Color:</label>
-          <input
+          <Label>Character Color:</Label>
+          <Input
             required={true}
             name='characterColor'
             placeholder='Color'
@@ -83,8 +83,8 @@ const characterCreation = () => {
           />
         </Wrapper>
         <Wrapper>
-          <label>Profession Name:</label>
-          <input
+          <Label>Profession Name:</Label>
+          <Input
             required={true}
             name='characterProfession'
             placeholder='Profession'
@@ -92,8 +92,8 @@ const characterCreation = () => {
           />
         </Wrapper>
         <Wrapper>
-          <label>Life</label>
-          <input
+          <Label>Life:</Label>
+          <Input
             defaultValue={0}
             name='characterLife'
             placeholder='Life'
@@ -101,8 +101,8 @@ const characterCreation = () => {
           />
         </Wrapper>
         <Wrapper>
-          <label>Mana</label>
-          <input
+          <Label>Mana:</Label>
+          <Input
             defaultValue={0}
             name='characterMana'
             placeholder='Mana'
@@ -110,8 +110,8 @@ const characterCreation = () => {
           />
         </Wrapper>
         <Wrapper>
-          <label>Armor Class</label>
-          <input
+          <Label>Armor Class: </Label>
+          <Input
             defaultValue={0}
             name='characterAc'
             placeholder='Armor Class'
@@ -122,7 +122,7 @@ const characterCreation = () => {
           Create character!
         </Button>
       </Form>
-    </Wrapper>
+    </>
   );
 };
 

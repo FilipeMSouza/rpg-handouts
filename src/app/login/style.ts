@@ -25,7 +25,7 @@ export const Input = styled.input`
   border: 1px solid var(--text-color);
 
   color: var(--text-color);
-  width: 25vh;
+  width: 40vh;
   height: 25px;
   font-size: 0.9rem;
   font-weight: 500;
