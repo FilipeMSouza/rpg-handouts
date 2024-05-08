@@ -1,6 +1,7 @@
+import type { SaturatedColor, ThemeData } from '@/@types/themeData';
 import { DARK_THEME, LIGHT_THEME } from '@/consts';
 
-const cyan = {
+const cyan: SaturatedColor = {
   sat50: '#EDFDFD',
   sat100: '#C4F1F9',
   sat200: '#9DECF9',
@@ -13,7 +14,7 @@ const cyan = {
   sat900: '#065666',
 };
 
-const gray = {
+const gray: SaturatedColor = {
   sat50: '#f7fafc',
   sat100: '#EDF2F7',
   sat200: '#E2E8F0',
@@ -26,7 +27,7 @@ const gray = {
   sat900: '#171923',
 };
 
-const red = {
+const red: SaturatedColor = {
   sat50: '#FFF5F5',
   sat100: '#FED7D7',
   sat200: '#FEB2B2',
@@ -39,7 +40,7 @@ const red = {
   sat900: '#63171B',
 };
 
-const orange = {
+const orange: SaturatedColor = {
   sat50: '#FFFAF0',
   sat100: '#FEEBC8',
   sat200: '#FBD38D',
@@ -52,7 +53,7 @@ const orange = {
   sat900: '#652B19',
 };
 
-const blue = {
+const blue: SaturatedColor = {
   sat50: '#EBF8FF',
   sat100: '#BEE3F8',
   sat200: '#90CDF4',
@@ -65,7 +66,7 @@ const blue = {
   sat900: '#1A365D',
 };
 
-const purple = {
+const purple: SaturatedColor = {
   sat50: '#FAF5FF',
   sat100: '#E9D8FD',
   sat200: '#D6BCFA',
@@ -78,7 +79,7 @@ const purple = {
   sat900: '#322659',
 };
 
-const pink = {
+const pink: SaturatedColor = {
   sat50: '#FFF5F7',
   sat100: '#FED7E2',
   sat200: '#FBB6CE',
@@ -91,7 +92,7 @@ const pink = {
   sat900: '#521B41',
 };
 
-const green = {
+const green: SaturatedColor = {
   sat50: '#F0FFF4',
   sat100: '#C6F6D5',
   sat200: '#9AE6B4',
@@ -103,7 +104,7 @@ const green = {
   sat800: '#22543D',
   sat900: '#1C4532',
 };
-const yellow = {
+const yellow: SaturatedColor = {
   sat50: '#FFFFF0',
   sat100: '#FEFCBF',
   sat200: '#FAF089',
@@ -115,7 +116,7 @@ const yellow = {
   sat800: '#744210',
   sat900: '#5F370E',
 };
-const teal = {
+const teal: SaturatedColor = {
   sat50: '#E6FFFA',
   sat100: '#B2F5EA',
   sat200: '#81E6D9',
@@ -128,7 +129,7 @@ const teal = {
   sat900: '#1D4044',
 };
 
-export const light = {
+export const light: ThemeData = {
   name: LIGHT_THEME,
   colors: {
     background: '#f8f8f8',
@@ -148,7 +149,7 @@ export const light = {
   },
 };
 
-export const dark = {
+export const dark: ThemeData = {
   name: DARK_THEME,
   colors: {
     background: '#242423',
