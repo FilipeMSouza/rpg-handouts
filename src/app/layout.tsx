@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import StyledComponentsRegistry from '@/lib/registry';
 import { GlobalStyle } from '@/style/global';
 
@@ -7,7 +7,7 @@ import { Poppins } from 'next/font/google';
 import { ThemeProvider } from 'styled-components';
 import { LoginPage, Navbar, Page, PageLink } from '@/app/style';
 import ThemeSelector from '@/components/molecules/ThemeSelector/ThemeSelctor';
-import { dark } from '@/style/Theme.styled';
+import useSavedTheme from './hooks/useSavedTheme';
 
 const poppins = Poppins({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -39,17 +39,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [theme, setTheme] = useState(dark);
-  const handleCallBack = (data: any) => {
-    setTheme(data);
-  };
+  const [theme, themeToggler] = useSavedTheme();
   return (
     <html lang='en'>
       <body className={poppins.className}>
         <StyledComponentsRegistry>
           <ThemeProvider theme={theme}>
             <NavBarComponent />
-            <ThemeSelector themeSelected={handleCallBack} />
+            <ThemeSelector selectedTheme={theme} themeToggle={themeToggler} />
             {children}
             <GlobalStyle />
           </ThemeProvider>
