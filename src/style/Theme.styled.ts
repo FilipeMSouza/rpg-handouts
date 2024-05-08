@@ -1,3 +1,5 @@
+import { DARK_THEME, LIGHT_THEME } from '@/consts';
+
 const cyan = {
   sat50: '#EDFDFD',
   sat100: '#C4F1F9',
@@ -127,7 +129,7 @@ const teal = {
 };
 
 export const light = {
-  name: 'light-theme',
+  name: LIGHT_THEME,
   colors: {
     background: '#f8f8f8',
     black: '#000000',
@@ -147,7 +149,7 @@ export const light = {
 };
 
 export const dark = {
-  name: 'dark-theme',
+  name: DARK_THEME,
   colors: {
     background: '#242423',
     black: '#000000',
