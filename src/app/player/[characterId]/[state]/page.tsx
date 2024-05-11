@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { FaShieldAlt } from 'react-icons/fa';
-import usePlayerState from '@/app/hooks/usePlayerState';
+import usePlayerState from '@/hooks/usePlayerState';
 
 import {
   ActionButtons,

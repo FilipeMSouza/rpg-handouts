@@ -37,32 +37,7 @@ export const Name = styled.span<{ color: string }>`
   text-shadow: 0 0 20px ${(props) => props.color};
 `;
 
-export const Navbar = styled.ul`
-  margin: 10px 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: aliceblue;
-  list-style-type: none;
-`;
-
 export const Page = styled.li`
   float: left;
   border-right: 1px solid darkgray;
-`;
-
-export const LoginPage = styled(Page)`
-  float: right;
-  border-left: 1px solid darkgray;
-`;
-
-export const PageLink = styled.a`
-  display: block;
-  color: black;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-
-  &:hover {
-    background-color: darkgray;
-  }
 `;

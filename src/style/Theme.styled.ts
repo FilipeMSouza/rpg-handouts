@@ -23,7 +23,7 @@ const gray: SaturatedColor = {
   sat500: '#718096',
   sat600: '#4A5568',
   sat700: '#2D3748',
-  sat800: '#1A202C',
+  sat800: '#29292E',
   sat900: '#171923',
 };
 

@@ -3,7 +3,7 @@
 import { Form, Wrapper } from '@/app/style';
 import { Button } from '@/app/player/[characterId]/[state]/style';
 import React, { useState } from 'react';
-import useRealtimeState from '@/app/hooks/useRealtimeState';
+import useRealtimeState from '@/hooks/useRealtimeState';
 import type { pjData } from '@/@types/pjData';
 
 const characterCreation = () => {
