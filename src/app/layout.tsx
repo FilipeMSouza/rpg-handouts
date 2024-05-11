@@ -5,7 +5,6 @@ import { GlobalStyle } from '@/style/global';
 
 import { Poppins } from 'next/font/google';
 import { ThemeProvider } from 'styled-components';
-// import { LoginPage, Navbar, Page, PageLink } from '@/app/style';
 import ThemeSelector from '@/components/molecules/ThemeSelector/ThemeSelector';
 import useSavedTheme from '@/hooks/useSavedTheme';
 import Navbar from '@/components/Organism/Navbar/Navbar';

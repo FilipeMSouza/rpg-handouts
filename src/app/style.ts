@@ -36,8 +36,3 @@ export const Name = styled.span<{ color: string }>`
       : theme.colors.gray.sat600};
   text-shadow: 0 0 20px ${(props) => props.color};
 `;
-
-export const Page = styled.li`
-  float: left;
-  border-right: 1px solid darkgray;
-`;
