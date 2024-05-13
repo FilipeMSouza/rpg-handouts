@@ -7,7 +7,7 @@ import { Poppins } from 'next/font/google';
 import { ThemeProvider } from 'styled-components';
 import ThemeSelector from '@/components/molecules/ThemeSelector/ThemeSelector';
 import useSavedTheme from '@/hooks/useSavedTheme';
-import Navbar from '@/components/Organism/Navbar/Navbar';
+import Navbar from '@/components/organism/Navbar/Navbar';
 
 const poppins = Poppins({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
