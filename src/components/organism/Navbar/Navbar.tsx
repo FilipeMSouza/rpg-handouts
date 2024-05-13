@@ -1,4 +1,4 @@
-import { NavbarBody } from '@/components/Organism/Navbar/style';
+import { NavbarBody } from '@/components/organism/Navbar/style';
 import { ActiveLink } from '@/components/atoms/ActiveLink/ActiveLink';
 
 const Navbar = () => {

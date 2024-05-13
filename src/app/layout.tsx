@@ -26,10 +26,10 @@ export default function RootLayout({
       <body className={poppins.className}>
         <StyledComponentsRegistry>
           <ThemeProvider theme={theme}>
-            <Navbar />
-            <ThemeSelector selectedTheme={theme} themeToggle={themeToggler} />
+            <Navbar/>
+            <ThemeSelector selectedTheme={theme} themeToggle={themeToggler}/>
             {children}
-            <GlobalStyle />
+            <GlobalStyle/>
           </ThemeProvider>
         </StyledComponentsRegistry>
       </body>
