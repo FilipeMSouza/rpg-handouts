@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { DARK_THEME } from '@/consts';
 
 export const Wrapper = styled.div`
   gap: 1rem;
@@ -29,36 +30,9 @@ export const Character = styled.div`
 export const Name = styled.span<{ color: string }>`
   font-weight: 400;
   font-size: 2.2rem;
-  color: var(--text-color);
+  color: ${({ theme }) =>
+    theme.name === DARK_THEME
+      ? theme.colors.textColor
+      : theme.colors.gray.sat600};
   text-shadow: 0 0 20px ${(props) => props.color};
-`;
-
-export const Navbar = styled.ul`
-  margin: 10px 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: aliceblue;
-  list-style-type: none;
-`;
-
-export const Page = styled.li`
-  float: left;
-  border-right: 1px solid darkgray;
-`;
-
-export const LoginPage = styled(Page)`
-  float: right;
-  border-left: 1px solid darkgray;
-`;
-
-export const PageLink = styled.a`
-  display: block;
-  color: black;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-
-  &:hover {
-    background-color: darkgray;
-  }
 `;
