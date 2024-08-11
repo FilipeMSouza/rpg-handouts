@@ -1,11 +1,13 @@
 'use client';
-
 import React from 'react';
 import StyledComponentsRegistry from '@/lib/registry';
-import { GlobalStyle } from './style/global';
+import { GlobalStyle } from '@/style/global';
 
 import { Poppins } from 'next/font/google';
-import { LoginPage, Navbar, Page, PageLink } from '@/app/style';
+import { ThemeProvider } from 'styled-components';
+import ThemeSelector from '@/components/molecules/ThemeSelector/ThemeSelector';
+import useSavedTheme from '@/hooks/useSavedTheme';
+import Navbar from '@/components/organism/Navbar/Navbar';
 
 const poppins = Poppins({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -13,37 +15,22 @@ const poppins = Poppins({
   style: ['normal', 'italic'],
 });
 
-const NavBarComponent = () => {
-  return (
-    <Navbar>
-      <Page>
-        <PageLink href={'/'}>Home</PageLink>
-      </Page>
-      <Page>
-        <PageLink href={'/new-char'}>Create new character</PageLink>
-      </Page>
-      <Page>
-        <PageLink href={'/database'}>Character database</PageLink>
-      </Page>
-      <LoginPage>
-        <PageLink href={'/login'}>Login</PageLink>
-      </LoginPage>
-    </Navbar>
-  );
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [theme, themeToggler] = useSavedTheme();
   return (
     <html lang='en'>
       <body className={poppins.className}>
         <StyledComponentsRegistry>
-          <NavBarComponent />
-          {children}
-          <GlobalStyle />
+          <ThemeProvider theme={theme}>
+            <Navbar/>
+            <ThemeSelector selectedTheme={theme} themeToggle={themeToggler}/>
+            {children}
+            <GlobalStyle/>
+          </ThemeProvider>
         </StyledComponentsRegistry>
       </body>
     </html>

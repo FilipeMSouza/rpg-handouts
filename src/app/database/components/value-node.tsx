@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import recursiveValueUpdate from '../utils/recursiveValueUpdate';
 import DatabaseContext from '../context';
+import numberParsing from '../utils/numberParsing';
 
 const ValueNode = ({ value, path }: { value: any, path: string[] }) => {
   const [localState, setLocalState] = useContext(DatabaseContext);
@@ -10,7 +11,7 @@ const ValueNode = ({ value, path }: { value: any, path: string[] }) => {
 
   const handleSubmit = (e: any) => {
     if (e.key !== 'Enter') return;
-    updateValue((e.target as HTMLInputElement).value, path);
+    updateValue(numberParsing((e.target as HTMLInputElement).value), path);
     setIsEditing(false);
   };
 
