@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { DARK_THEME } from '@/consts';
 
 export const NavbarBody = styled.nav`
-  max-width: 1038px;
   height: 50px;
   width: 100%;
   padding: 0 20px;

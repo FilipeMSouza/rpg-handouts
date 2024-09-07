@@ -12,6 +12,7 @@ const useSavedTheme = (): [ThemeData, () => void] => {
   const localStorageTheme = useMemo(() => {
     if (isVercelLoading()) return light;
     const theme = localStorage.getItem(THEME_KEY);
+    console.log(theme)
     return theme === DARK_THEME ? dark : light;
   }, []);
 

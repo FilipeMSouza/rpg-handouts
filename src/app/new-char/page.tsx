@@ -4,7 +4,7 @@ import { Button } from '@/app/player/[characterId]/[state]/style';
 import React, { useState } from 'react';
 import useRealtimeState from '@/hooks/useRealtimeState';
 import type { pjData } from '@/@types/pjData';
-import { Form, Input, Label, Wrapper } from '@/app/login/style';
+import { Form, Input, Label, Wrapper, ColorInput } from '@/app/new-char/style';
 
 const characterCreation = () => {
   const [players, setPlayers] = useRealtimeState<pjData[]>();
@@ -75,7 +75,7 @@ const characterCreation = () => {
         </Wrapper>
         <Wrapper>
           <Label>Character Color:</Label>
-          <Input
+          <ColorInput
             required={true}
             name='characterColor'
             placeholder='Color'
