@@ -15,16 +15,16 @@ const cyan: SaturatedColor = {
 };
 
 const gray: SaturatedColor = {
-  sat50: '#f7fafc',
-  sat100: '#EDF2F7',
-  sat200: '#E2E8F0',
-  sat300: '#CBD5E0',
-  sat400: '#A0AEC0',
-  sat500: '#718096',
-  sat600: '#4A5568',
-  sat700: '#2D3748',
-  sat800: '#29292E',
-  sat900: '#171923',
+  sat50: '#EBEBEB',
+  sat100: '#D5D5D5',
+  sat200: '#BFBFBF',
+  sat300: '#A9A9A9',
+  sat400: '#939393',
+  sat500: '#7E7E7E',
+  sat600: '#686868',
+  sat700: '#525252',
+  sat800: '#3C3C3C',
+  sat900: '#262626',
 };
 
 const red: SaturatedColor = {
@@ -152,7 +152,7 @@ export const light: ThemeData = {
 export const dark: ThemeData = {
   name: DARK_THEME,
   colors: {
-    background: '#242423',
+    background: '#101010',
     black: '#000000',
     white: '#FFFFFF',
     textColor: '#BFBFBF',
