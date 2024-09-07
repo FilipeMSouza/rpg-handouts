@@ -66,10 +66,6 @@ export const NavbarBody = styled.nav`
       : theme.colors.gray.sat50};
     }
   }
-
-  @media (min-width: 2560px) {
-    max-width: 2520px;
-  }
 `;
 
 export const ItemsWrapper = styled.div`
