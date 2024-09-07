@@ -4,7 +4,7 @@ import { Button } from '@/app/player/[characterId]/[state]/style';
 import React, { useState } from 'react';
 import useRealtimeState from '@/hooks/useRealtimeState';
 import type { pjData } from '@/@types/pjData';
-import { Form, Input, Label, Wrapper, ColorInput } from '@/app/new-char/style';
+import { ColorInput, Form, Input, Label, Wrapper } from '@/app/new-char/style';
 
 const characterCreation = () => {
   const [players, setPlayers] = useRealtimeState<pjData[]>();
