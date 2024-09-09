@@ -17,6 +17,9 @@ const Navbar = () => {
         <ActiveLink activeClassName={'active'} href={'/god-hand'}>
           <p>God Hand</p>
         </ActiveLink>
+        <ActiveLink activeClassName={'active'} href={'/tesouros'}>
+          <p>Tesouros</p>
+        </ActiveLink>
       </div>
       <div className={'LoginAction'}>
         <ActiveLink activeClassName={'active'} href={'/login'}>

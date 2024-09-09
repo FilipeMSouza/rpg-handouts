@@ -12,7 +12,7 @@ import Navbar from '@/components/organism/Navbar/Navbar';
 const poppins = Poppins({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
   subsets: ['latin'],
-  style: ['normal', 'italic'],
+  style: ['normal', 'italic'], 
 });
 
 export default function RootLayout({
