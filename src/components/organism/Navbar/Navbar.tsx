@@ -8,6 +8,9 @@ const Navbar = () => {
         <ActiveLink activeClassName={'active'} href={'/'}>
           <p>Home</p>
         </ActiveLink>
+        <ActiveLink activeClassName={'active'} href={'/character-sheet'}>
+          <p>Character Sheet</p>
+        </ActiveLink>
         <ActiveLink activeClassName={'active'} href={'/new-char'}>
           <p>Create new character</p>
         </ActiveLink>
