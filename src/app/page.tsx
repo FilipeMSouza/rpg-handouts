@@ -5,9 +5,10 @@ import type { pjData } from '@/@types/pjData';
 import useRealtimeState from '@/hooks/useRealtimeState';
 
 import { Character, Name, PlayerLink, Wrapper } from './style';
+import {players} from '@/mocks/data';
 
 const Home = () => {
-  const [players] = useRealtimeState<pjData[]>();
+  // const [players] = useRealtimeState<pjData[]>();
 
   return (
     <Wrapper>
