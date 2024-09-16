@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { FaShieldAlt } from 'react-icons/fa';
-import usePlayerState from '@/hooks/usePlayerState';
 
 import {
   ActionButtons,
@@ -18,6 +17,7 @@ import {
   Name,
   Wrapper,
 } from './style';
+import usePlayerDetails from '@/hooks/supabase/usePlayerDetails';
 
 const character = ({
   params: { characterId, state },
@@ -34,19 +34,28 @@ const character = ({
     );
   };
 
-  const [pj, modifyPlayer] = usePlayerState(parseInt(characterId));
+  const [pj, modifyPlayer] = usePlayerDetails(characterId);
   const handleLife = (shouldReduce: boolean) =>
-    modifyPlayer('currentLife', (prev) => prev + (shouldReduce ? -1 : +1));
+    modifyPlayer(
+      'life_current',
+      (pj?.life_current ?? 0) + (shouldReduce ? -1 : +1)
+    );
   const handleMana = (shouldReduce: boolean) =>
-    modifyPlayer('currentMana', (prev) => prev + (shouldReduce ? -1 : +1));
+    modifyPlayer(
+      'mana_current',
+      (pj?.mana_current ?? 0) + (shouldReduce ? -1 : +1)
+    );
   const handleCA = (shouldReduce: boolean) =>
-    modifyPlayer('armorClass', (prev) => prev + (shouldReduce ? -1 : +1));
+    modifyPlayer(
+      'armor_class',
+      (pj?.armor_class ?? 0) + (shouldReduce ? -1 : +1)
+    );
 
   if (!pj) return <div>loading...</div>;
   return (
     <>
       <Wrapper>
-        <Image src={pj.image} alt={pj.name} width={90} height={90} />
+        <Image src={pj.avatar} alt={pj.name} width={90} height={90} />
         <Character>
           <Name color={pj.color}>{pj.name}</Name>
           <Description>
@@ -58,13 +67,13 @@ const character = ({
             ) : (
               <>
                 <Life>
-                  {pj.currentLife}/{pj.life}
+                  {pj.life_current}/{pj.life_max}
                 </Life>
                 <Mana>
-                  {pj.currentMana}/{pj.mana}
+                  {pj.mana_current}/{pj.mana_max}
                 </Mana>
                 <ArmorClass>
-                  <FaShieldAlt className='icon' /> {pj.armorClass}
+                  <FaShieldAlt className='icon' /> {pj.armor_class}
                 </ArmorClass>
               </>
             )}
