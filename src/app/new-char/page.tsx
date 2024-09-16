@@ -4,10 +4,10 @@ import { Form, Wrapper } from '@/app/style';
 import { Button } from '@/app/player/[characterId]/[state]/style';
 import React, { useState } from 'react';
 import useRealtimeState from '@/hooks/useRealtimeState';
-import type { pjData } from '@/@types/pjData';
+import type { PlayerData } from '@/@types/playerData';
 
 const characterCreation = () => {
-  const [players, setPlayers] = useRealtimeState<pjData[]>();
+  const [players, setPlayers] = useRealtimeState<PlayerData[]>();
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
 
   const handleCharacterCreation = (formData: FormData) => {
@@ -21,17 +21,18 @@ const characterCreation = () => {
 
     reader.readAsDataURL(formData.get('characterAvatar') as File);
     reader.onload = () => {
-      const newCharacter: pjData = {
+      const newCharacter: PlayerData = {
+        id: formData.get('characterId')! as string,
         name: formData.get('characterName')! as string,
-        image: reader.result as string,
+        avatar: reader.result as string,
         profession: formData.get('characterProfession')! as string,
         color: formData.get('characterColor')! as string,
-        life: parseInt(formData.get('characterLife')! as string),
-        mana: parseInt(formData.get('characterMana')! as string),
-        currentLife: parseInt(formData.get('characterLife')! as string),
-        currentMana: parseInt(formData.get('characterMana')! as string),
+        life_max: parseInt(formData.get('characterLife')! as string),
+        mana_max: parseInt(formData.get('characterMana')! as string),
+        life_current: parseInt(formData.get('characterLife')! as string),
+        mana_current: parseInt(formData.get('characterMana')! as string),
         level: parseInt(formData.get('characterLevel')! as string),
-        armorClass: parseInt(formData.get('characterAc')! as string),
+        armor_class: parseInt(formData.get('characterAc')! as string),
       };
 
       if (players === undefined)
