@@ -8,11 +8,11 @@ const Navbar = () => {
         <ActiveLink activeClassName={'active'} href={'/'}>
           <p>Home</p>
         </ActiveLink>
-        {/* TODO: Reenable when finished supabase changes */}
-        {/* <ActiveLink activeClassName={'active'} href={'/new-char'}>
+        <ActiveLink activeClassName={'active'} href={'/new-char'}>
           <p>Create new character</p>
         </ActiveLink>
-        <ActiveLink activeClassName={'active'} href={'/database'}>
+        {/* TODO: Reenable when finished supabase changes */}
+        {/* <ActiveLink activeClassName={'active'} href={'/database'}>
           <p>Character database</p>
         </ActiveLink> */}
         <ActiveLink activeClassName={'active'} href={'/god-hand'}>

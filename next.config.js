@@ -17,6 +17,7 @@ module.exports = {
     SCOPE: process.env.SCOPE,
     SUPABASE_URL: process.env.SUPABASE_URL,
     SUPABASE_KEY: process.env.SUPABASE_KEY,
+    IMGBB_API: process.env.IMGBB_API,
   },
   images: {
     remotePatterns: [
