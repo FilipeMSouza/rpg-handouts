@@ -2,45 +2,44 @@
 
 import { Form, Wrapper } from '@/app/style';
 import { Button } from '@/app/player/[characterId]/[state]/style';
-import React, { useState } from 'react';
-import useRealtimeState from '@/hooks/useRealtimeState';
-import type { PlayerData } from '@/@types/playerData';
+import React, { useContext, useState } from 'react';
+import { SupabaseContext } from '@/lib/supabase';
+import uploadImage from '@/lib/uploadImage';
+import parseImageFile from '@/lib/parseImageFile';
 
-const characterCreation = () => {
-  const [players, setPlayers] = useRealtimeState<PlayerData[]>();
-  const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
+const CharacterCreation = () => {
+  const supabase = useContext(SupabaseContext);
+  const [isCreateButtonDisabled, setIsCreateButtonDisabled] = useState(false);
 
-  const handleCharacterCreation = (formData: FormData) => {
-    setButtonDisabled(true);
-    sendToServer(formData);
-    setButtonDisabled(false);
+  const handleCharacterCreation = async (formData: FormData) => {
+    setIsCreateButtonDisabled(true);
+    await sendToServer(formData);
+    setIsCreateButtonDisabled(false);
   };
 
-  const sendToServer = (formData: FormData) => {
-    const reader = new FileReader();
+  const sendToServer = async (formData: FormData) => {
+    if (!supabase) throw new Error('No Supabase client!');
 
-    reader.readAsDataURL(formData.get('characterAvatar') as File);
-    reader.onload = () => {
-      const newCharacter: PlayerData = {
-        id: formData.get('characterId')! as string,
-        name: formData.get('characterName')! as string,
-        avatar: reader.result as string,
-        profession: formData.get('characterProfession')! as string,
-        color: formData.get('characterColor')! as string,
-        life_max: parseInt(formData.get('characterLife')! as string),
-        mana_max: parseInt(formData.get('characterMana')! as string),
-        life_current: parseInt(formData.get('characterLife')! as string),
-        mana_current: parseInt(formData.get('characterMana')! as string),
-        level: parseInt(formData.get('characterLevel')! as string),
-        armor_class: parseInt(formData.get('characterAc')! as string),
-      };
+    const { error } = await supabase
+      .from('Players')
+      .insert({
+        name: formData.get('characterName') as string,
+        avatar: await uploadImage(
+          await parseImageFile(formData.get('characterAvatar') as File)
+        ),
+        color: formData.get('characterColor') as string,
+        profession: formData.get('characterProfession') as string,
+        life_max: parseInt(formData.get('characterLife') as string),
+        mana_max: parseInt(formData.get('characterMana') as string),
+        life_current: parseInt(formData.get('characterLife') as string),
+        mana_current: parseInt(formData.get('characterMana') as string),
+        level: parseInt(formData.get('characterLevel') as string),
+        armor_class: parseInt(formData.get('characterAc') as string),
+      })
+      .select();
 
-      if (players === undefined)
-        return alert('Erro 500 algo de errado aconteceu...');
-      setPlayers([...players, newCharacter]);
-      alert(`${newCharacter.name} has been added to the server.`);
-      setButtonDisabled(false);
-    };
+    if (error) throw new Error(error.message);
+    alert('Character created!');
   };
 
   return (
@@ -119,7 +118,7 @@ const characterCreation = () => {
             type='number'
           />
         </Wrapper>
-        <Button color='toggle' type='submit' disabled={buttonDisabled}>
+        <Button color='toggle' type='submit' disabled={isCreateButtonDisabled}>
           Create character!
         </Button>
       </Form>
@@ -127,4 +126,4 @@ const characterCreation = () => {
   );
 };
 
-export default characterCreation;
+export default CharacterCreation;
