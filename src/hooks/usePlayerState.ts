@@ -2,17 +2,17 @@
 
 import { useMemo } from 'react';
 
-import type { pjData } from '@/@types/pjData';
+import type { PlayerData } from '@/@types/playerData';
 import useRealtimeState from './useRealtimeState';
 
 type SetPlayerStateValue = {
-    [K in keyof pjData]: pjData[K];
+    [K in keyof PlayerData]: PlayerData[K];
 }
 
-type SetPlayerState = <K extends keyof pjData>(key: K, value: SetPlayerStateValue[K]| ((prev: SetPlayerStateValue[K]) => SetPlayerStateValue[K])) => void;
+type SetPlayerState = <K extends keyof PlayerData>(key: K, value: SetPlayerStateValue[K]| ((prev: SetPlayerStateValue[K]) => SetPlayerStateValue[K])) => void;
 
-const usePlayerState = (id: number): [state: pjData | undefined, setState: SetPlayerState] => {
-  const [serverState, setServerState] = useRealtimeState<pjData[]>();
+const usePlayerState = (id: number): [state: PlayerData | undefined, setState: SetPlayerState] => {
+  const [serverState, setServerState] = useRealtimeState<PlayerData[]>();
   const playerState = useMemo(() => {
     if (!serverState) return undefined;
     return serverState[id];
@@ -31,7 +31,7 @@ const usePlayerState = (id: number): [state: pjData | undefined, setState: SetPl
    *   pj!.currentLife + (shouldReduce ? - 1 : + 1)
    * );
    */
-  const setPlayerState: SetPlayerState = <K extends keyof pjData>(key: K, value: SetPlayerStateValue[K] | ((prev: SetPlayerStateValue[K]) => SetPlayerStateValue[K])) => {
+  const setPlayerState: SetPlayerState = <K extends keyof PlayerData>(key: K, value: SetPlayerStateValue[K] | ((prev: SetPlayerStateValue[K]) => SetPlayerStateValue[K])) => {
     if (!serverState) return;
     setServerState(serverState.map((player, i) => {
       if (i !== id) return player;
